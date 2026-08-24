@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Term 3 Week 6 Reading Taskboard</title>
+
+<style>
+:root {
+  --accent: #376848;
+  --ink: #17142a;
+  --paper: #f7f0de;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #151126;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+
+body.blue {
+  --accent: #205f8e;
+}
+
+.hero {
+  min-height: 480px;
+  padding: 55px 20px;
+  text-align: center;
+  color: #fff;
+  background:
+    radial-gradient(circle at top, #593c78, #1b1428 65%);
+  border-bottom: 1px solid #806b95;
+}
+
+.hero small {
+  color: #e8c76f;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 800;
+}
+
+.hero h1 {
+  font: 700 clamp(50px, 9vw, 100px)/0.9 Georgia, serif;
+  margin: 25px 0 18px;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+  color: #ddd2e5;
+}
+
+.switch {
+  display: inline-flex;
+  padding: 5px;
+  background: #171020;
+  border: 1px solid #88749c;
+  border-radius: 50px;
+}
+
+.switch button {
+  border: 0;
+  padding: 12px 22px;
+  border-radius: 50px;
+  background: transparent;
+  color: #ddd;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.switch .on {
+  background: var(--accent);
+  color: #fff;
+}
+
+.class-link {
+  display: block;
+  width: fit-content;
+  color: #f6db98;
+  margin: 15px auto;
+  font-weight: 800;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: -55px;
+}
+
+.steps article,
+.group,
+.expect {
+  background: var(--paper);
+  border: 1px solid #c7b582;
+  box-shadow: 0 12px 25px #0005;
+}
+
+.steps article {
+  padding: 20px;
+}
+
+.steps b {
+  color: var(--accent);
+}
+
+.rotation {
+  display: flex;
+  gap: 8px;
+  margin: 25px 0;
+  overflow-x: auto;
+}
+
+.rotation div {
+  min-width: 150px;
+  flex: 1;
+  padding: 14px;
+  background: #251d32;
+  color: #fff;
+  border: 1px solid #5e516c;
+}
+
+.rotation small,
+.rotation strong {
+  display: block;
+}
+
+.rotation small {
+  color: #b9aeca;
+}
+
+.group {
+  margin: 12px 0;
+}
+
+.head {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  display: grid;
+  grid-template-columns: 58px 1fr 30px;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.num {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: white;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.head small,
+.head strong,
+.head em {
+  display: block;
+}
+
+.head small {
+  color: var(--accent);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.head strong {
+  font: 700 24px Georgia, serif;
+}
+
+.head em {
+  font-style: normal;
+  color: #655d68;
+}
+
+.content {
+  display: none;
+  border-top: 1px solid #d5c8a7;
+  padding: 18px;
+  grid-template-columns: 1fr 230px;
+  gap: 18px;
+}
+
+.group.open .content {
+  display: grid;
+}
+
+.names {
+  background: #ebe0c4;
+  padding: 12px;
+  line-height: 1.5;
+}
+
+.content li {
+  margin: 9px 0;
+  line-height: 1.5;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.links a {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.reflection {
+  color: var(--accent);
+  font-weight: 800;
+  text-decoration: none;
+  background: white;
+  border: 1px solid #c5b686;
+  padding: 7px;
+}
+
+.reflection img {
+  width: 100%;
+  aspect-ratio: 0.707;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.reflection span {
+  display: block;
+  padding: 9px 3px;
+}
+
+.quests {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.quest {
+  background: #251b34;
+  color: #fff;
+  padding: 22px;
+  border: 1px solid #746486;
+  scroll-margin-top: 20px;
+}
+
+.quest h2 {
+  font: 700 30px Georgia, serif;
+}
+
+.words {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.words button {
+  min-height: 80px;
+  background: #3a2950;
+  color: white;
+  border: 1px solid #bd9b55;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.story {
+  background: #f3ead4;
+  color: #222;
+  padding: 14px;
+  line-height: 1.65;
+  border-left: 5px solid #d4a746;
+}
+
+.expect {
+  padding: 22px;
+  margin: 25px 0;
+}
+
+.expect h2 {
+  font-family: Georgia, serif;
+}
+
+.expect li {
+  margin: 8px 0;
+}
+
+footer {
+  text-align: center;
+  color: #b2a5bb;
+  padding: 28px;
+}
+
+@media (max-width: 720px) {
+  .steps,
+  .quests {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .reflection {
+    max-width: 300px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+  <small>Term 3 · Week 6 · Fantasy Reading Quest</small>
+
+  <h1>Reading Taskboard</h1>
+
+  <p>
+    Choose your room, find your group, read first, then complete
+    your book task and printed reflection.
+  </p>
+
+  <div class="switch">
+    <button id="room5Button" class="on">Room 5</button>
+    <button id="room28Button">Room 28</button>
+  </div>
+
+  <a id="classLink" class="class-link" target="_blank">
+    Open Google Classroom ↗
+  </a>
+</header>
+
+<main class="wrap">
+
+  <section class="steps">
+    <article>
+      <b>01</b>
+      <h3>Read first</h3>
+      <p>Open the correct text and read the assigned section.</p>
+    </article>
+
+    <article>
+      <b>02</b>
+      <h3>Use evidence</h3>
+      <p>Copy the question and answer underneath in a full sentence.</p>
+    </article>
+
+    <article>
+      <b>03</b>
+      <h3>Reflect</h3>
+      <p>Finish the printed reflection after your book task.</p>
+    </article>
+  </section>
+
+  <section class="rotation">
+    <div>
+      <strong>Teacher rotation</strong>
+      <small>Read with Mrs Mohi</small>
+    </div>
+
+    <div>
+      <small>Tuesday</small>
+      <strong>Group 1</strong>
+    </div>
+
+    <div>
+      <small>Wednesday</small>
+      <strong>Group 2</strong>
+    </div>
+
+    <div>
+      <small>Thursday</small>
+      <strong>Group 3</strong>
+    </div>
+
+    <div>
+      <small>Friday</small>
+      <strong>Group 4</strong>
+    </div>
+  </section>
+
+  <section id="groups"></section>
+
+  <section class="quests">
+
+    <article id="word-wizard" class="quest">
+      <small>ROOM 5 · GROUP 1</small>
+
+      <h2>Word Wizard Quest</h2>
+
+      <p>
+        Tap a rune. Say each sound, blend the word, then read it smoothly.
+      </p>
+
+      <div class="words" id="wordCards"></div>
+
+      <div class="story">
+        <b>Read:</b> The cat found a lamp. The lamp was in the sun.
+        “I wish for a map,” said the cat.
+      </div>
+    </article>
+
+    <article id="mystery-lamp" class="quest">
+      <small>ROOM 28 · GROUP 1</small>
+
+      <h2>The Mystery Lamp</h2>
+
+      <div class="story">
+        <p>
+          Mia and Tama opened the old storeroom.
+          Dust floated through the light.
+        </p>
+
+        <p>
+          Behind a box, Mia found a small golden lamp.
+          Tama rubbed it with his sleeve.
+        </p>
+
+        <p>
+          The lamp began to glow.
+          A soft voice whispered, “Choose carefully.”
+        </p>
+
+        <p>
+          Mia and Tama stared at each other.
+          What should they do next?
+        </p>
+      </div>
+
+      <p>
+        <b>Talk about it:</b> Who found the lamp? Where was it?
+        What changed? How did they feel? What do you predict?
+      </p>
+    </article>
+
+  </section>
+
+  <section class="expect">
+    <h2>📖 Humanities Book Expectations</h2>
+
+    <ul>
+      <li>Write the <b>date beside the felt margin</b>.</li>
+
+      <li>
+        Write the <b>title in the centre</b> and underline it neatly
+        with a ruler.
+      </li>
+
+      <li>
+        Copy each question first and write the answer directly underneath.
+      </li>
+
+      <li>
+        Use a complete sentence and evidence from the text.
+      </li>
+
+      <li>
+        Complete the printed reflection when your reading task is finished.
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  Week 6 Reading Quest · Room 5 & Room 28 · Mrs Mohi
+</footer>
+
+<script>
+const commonGroups = {
+  group2: {
+    number: 2,
+    title: "Rewa Kings",
+    focus: "Connect a modern legend with King Arthur",
+    description:
+      "Five friends explore an abandoned Manurewa factory, uncover old records and discover a mysterious briefcase.",
+    tasks: [
+      "Tuesday: Read The Original Story. Record three facts about King Arthur.",
+      "Wednesday: Read Rewa Kings. Identify the factory, search, locked door and briefcase.",
+      "Thursday: Explain two connections between the old legend and the modern story.",
+      "Friday: Answer using evidence, then complete the printed reflection."
+    ],
+    links: [
+      ["Rewa Kings Hub", "https://bairdcallumj-alt.github.io/ari/"],
+      ["Original Legend", "https://bairdcallumj-alt.github.io/ari/original.html"],
+      ["Read Rewa Kings", "https://bairdcallumj-alt.github.io/ari/story.html"]
+    ],
+    reflection: "reflections/group2-rewa-kings.png"
+  },
+
+  group3: {
+    number: 3,
+    title: "Aladdin and the Lamp",
+    focus: "Cause and effect, magical rules and character choices",
+    description:
+      "Follow Aladdin from the marketplace to the Cave of Wonders and the discovery of the lamp.",
+    tasks: [
+      "Tuesday: Read Chapter 1. What do Jasmine’s choices reveal?",
+      "Wednesday: Read Chapters 2–3. Record the cave and three-wish rules.",
+      "Thursday: Read Chapters 4–5. Track one lie and the consequence it causes.",
+      "Friday: Complete the cause-and-effect response and printed reflection."
+    ],
+    links: [
+      ["Open Aladdin Chapters", "https://bairdcallumj-alt.github.io/lamp/index.html"]
+    ],
+    reflection: "reflections/group3-aladdin.png"
+  },
+
+  group4: {
+    number: 4,
+    title: "Aladdin: Power and Consequences",
+    focus: "Analyse temptation, identity, power, truth and responsibility",
+    description:
+      "Read all seven chapters and evaluate how each wish changes the conflict.",
+    tasks: [
+      "Tuesday: Read Chapters 1–2. Compare Aladdin’s and Jasmine’s motivations.",
+      "Wednesday: Read Chapters 3–4. Analyse how disguise changes relationships.",
+      "Thursday: Read Chapters 5–7. Track Jafar’s rise and Aladdin’s final choice.",
+      "Friday: Explain the warning about power, then complete the reflection."
+    ],
+    links: [
+      ["Open Complete Aladdin Story", "https://bairdcallumj-alt.github.io/lamp/index.html"]
+    ],
+    reflection: "reflections/group4-aladdin.png"
+  }
+};
+
+const classroomData = {
+  room5: {
+    classroom:
+      "https://classroom.google.com/c/ODQ0NTY3MzM2Mzc1",
+
+    groups: [
+      {
+        number: 1,
+        title: "Word Wizard Quest",
+        focus:
+          "Sounds, blending, high-frequency words and simple fantasy sentences",
+        students:
+          "Sione · Robert · Aaleyah · Joe",
+        description:
+          "An accessible fantasy phonics activity built into this taskboard.",
+        tasks: [
+          "Tuesday: Tap and read the six word cards.",
+          "Wednesday: Build and read the fantasy sentences with the teacher.",
+          "Thursday: Draw the magical object and complete the sentence frame.",
+          "Friday: Reread for fluency, then complete the printed reflection."
+        ],
+        links: [
+          ["Open Word Wizard", "#word-wizard"]
+        ],
+        reflection:
+          "reflections/room5-group1-word-wizard.png"
+      },
+
+      {
+        ...commonGroups.group2,
+        students:
+          "Conellius · Antonio · Taira · Mathew · Jett · Kalala"
+      },
+
+      {
+        ...commonGroups.group3,
+        students:
+          "Zach · Boston · Nare · James · Ariellyn · Natalia · Limani · Ramona · Richard"
+      },
+
+      {
+        ...commonGroups.group4,
+        students:
+          "Amaia · Luther · Dante · Fusi · Beaver · Khan · Alenna · Taofi"
+      }
+    ]
+  },
+
+  room28: {
+    classroom:
+      "https://classroom.google.com/c/ODcxODk5NjUwOTk0",
+
+    groups: [
+      {
+        number: 1,
+        title: "The Mystery Lamp",
+        focus:
+          "Supported reading, vocabulary, sequencing and prediction",
+        students:
+          "Matthias · Te Aniwaniwa · Karle",
+        description:
+          "A short fantasy mystery with a little more challenge, built into this taskboard.",
+        tasks: [
+          "Tuesday: Read The Mystery Lamp with the teacher.",
+          "Wednesday: Match six words to their meanings and reread for fluency.",
+          "Thursday: Put four events in order and make a prediction.",
+          "Friday: Complete the sentence frame and printed reflection."
+        ],
+        links: [
+          ["Open The Mystery Lamp", "#mystery-lamp"]
+        ],
+        reflection:
+          "reflections/room28-group1-mystery-lamp.png"
+      },
+
+      {
+        ...commonGroups.group2,
+        students:
+          "Sarah Radich · Afu · Atonina · Henry · Tiavare · Qundalieez · Aakrit · Manish · Sarah Pukerua · Cardo"
+      },
+
+      {
+        ...commonGroups.group3,
+        students:
+          "Nora · Poseidon · Ananya · Ibrahim · Aiden · Khloe · Zach"
+      },
+
+      {
+        ...commonGroups.group4,
+        students:
+          "Trishav · Mariah · Jerome · Jayda-Cherie · Hinemoa · Te Ao Marama"
+      }
+    ]
+  }
+};
+
+let currentRoom = "room5";
+
+const room5Button = document.getElementById("room5Button");
+const room28Button = document.getElementById("room28Button");
+const classLink = document.getElementById("classLink");
+const groupsContainer = document.getElementById("groups");
+
+function createGroupCard(group, index) {
+  const article = document.createElement("article");
+  article.className = index === 0 ? "group open" : "group";
+
+  const linkButtons = group.links
+    .map(([label, url]) => {
+      const target = url.startsWith("http")
+        ? 'target="_blank" rel="noopener"'
+        : "";
+
+      return `
+        <a href="${url}" ${target}>
+          ${label} ↗
+        </a>
+      `;
+    })
+    .join("");
+
+  const taskItems = group.tasks
+    .map(task => `<li>${task}</li>`)
+    .join("");
+
+  article.innerHTML = `
+    <button class="head" type="button">
+      <span class="num">${group.number}</span>
+
+      <span>
+        <small>Group ${group.number}</small>
+        <strong>${group.title}</strong>
+        <em>${group.focus}</em>
+      </span>
+
+      <b>⌄</b>
+    </button>
+
+    <div class="content">
+      <div>
+        <p class="names">
+          <b>Your group:</b> ${group.students}
+        </p>
+
+        <p>${group.description}</p>
+
+        <ol>${taskItems}</ol>
+
+        <div class="links">
+          ${linkButtons}
+        </div>
+      </div>
+
+      <a class="reflection"
+         href="${group.reflection}"
+         target="_blank"
+         rel="noopener">
+
+        <img src="${group.reflection}"
+             alt="${group.title} reading reflection sheet">
+
+        <span>View reflection sheet ↗</span>
+      </a>
+    </div>
+  `;
+
+  article.querySelector(".head").addEventListener("click", () => {
+    article.classList.toggle("open");
+  });
+
+  return article;
+}
+
+function renderRoom() {
+  const data = classroomData[currentRoom];
+
+  document.body.className =
+    currentRoom === "room28" ? "blue" : "";
+
+  room5Button.className =
+    currentRoom === "room5" ? "on" : "";
+
+  room28Button.className =
+    currentRoom === "room28" ? "on" : "";
+
+  classLink.href = data.classroom;
+
+  classLink.textContent =
+    currentRoom === "room5"
+      ? "Open Room 5 Google Classroom ↗"
+      : "Open Room 28 Google Classroom ↗";
+
+  groupsContainer.innerHTML = "";
+
+  data.groups.forEach((group, index) => {
+    groupsContainer.appendChild(
+      createGroupCard(group, index)
+    );
+  });
+}
+
+room5Button.addEventListener("click", () => {
+  currentRoom = "room5";
+  renderRoom();
+});
+
+room28Button.addEventListener("click", () => {
+  currentRoom = "room28";
+  renderRoom();
+});
+
+const phonicsWords = [
+  ["cat", "c-a-t"],
+  ["map", "m-a-p"],
+  ["sun", "s-u-n"],
+  ["dog", "d-o-g"],
+  ["wish", "w-i-sh"],
+  ["lamp", "l-a-m-p"]
+];
+
+const wordCards = document.getElementById("wordCards");
+
+phonicsWords.forEach(([word, sounds]) => {
+  const button = document.createElement("button");
+
+  button.innerHTML = `
+    ✦
+    <br>
+    <small>tap to reveal</small>
+  `;
+
+  button.addEventListener("click", () => {
+    button.innerHTML = `
+      ${word}
+      <br>
+      <small>${sounds}</small>
+    `;
+  });
+
+  wordCards.appendChild(button);
+});
+
+renderRoom();
+</script>
+
+</body>
+</html>
